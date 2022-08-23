@@ -1,0 +1,195 @@
+---
+output:
+  word_document:
+    reference_docx: 'template.docx'
+date: "`r Sys.Date()`"
+title: Regression-Based Normative Formulae for the Repeatable Battery for the Assessment
+  of Neuropsychological Status (RBANS) from the European Prevention of Alzheimer's
+  Disease Study (EPAD)
+author: Ross A. Dunne(1), Craig W. Ritchie(2), Alistair Burns(1), for the European
+  Prevention of Alzheimer's Disease (EPAD) Consortium*
+header-includes: usepackage{setspace}
+csl: apa-single-spaced.csl
+bibliography: references.bib
+spacing: double
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+```
+
+```{r, echo=FALSE, results=FALSE, message=FALSE, warning=FALSE, fig.show='hide'}
+source('./load_packages.R')
+source("eda.R")
+```
+
+**Word count: (not including abstract)  2321**
+
+**Tables: 4**
+
+**Supplementary Tables: 19 **
+
+
+\newpage
+
+## Affiliations
+
+1.	Geoffrey Jefferson Brain Research Centre, University of Manchester, Manchester U.K. & Greater Manchester Mental Health Foundation Trust 
+
+2. University of Edinburgh, Edinburgh, Scotland. 
+
+
+\newpage
+
+\singlespacing
+
+## Abstract
+**Objectives:** We aimed to strengthen the evidence base for the Repeatable Battery for the Assessment of Neuropsychological Status (RBANS) by describing updated older adult norms for the total and individual domain subscores of the scale. We achieved this by gathering data from a sample of healthy European individuals over 50 years of age and using regression equations corrected for education, age, and sex. 
+
+
+**Method:**
+The European Prevention of Alzheimer's Disease (EPAD) study recruited 2,096 older people from 30 sites across Europe. From these, we selected healthy older adults with Clinical Dementia Rating (CDR) of 0, a Mini Mental State Score (MMSE) of above 23, and cerebrospinal fluid (CSF) A$\beta$~1-42~ less than 1000 pg/ml or phosphorylated Tau (p-Tau~181~) greater than 27pg/ml (as measured by the Roche Elecsys system). We excluded people who had a prior history of head injury or who were taking benzodiazepine or antipsychotic medication. People with ongoing significant active neurological/psychiatric illness were excluded from EPAD recruitment. For favourably distributed variables, we generated gaussian linear mixed-effects regression models with fixed effects for age, sex and education, and random intercepts for research site. For negatively skewed, low-ceiling individual test items (line orientation, picture naming, figure copy and list recognition), we generated look-up tables based on empirical cumulative distribution functions (ECDF), splitting according to statistically significant covariates of large effect (age, sex, or education) in a linear mixed-effects beta-regression.  
+
+**Results:** 
+Age, sex and education adjusted norms demonstrated that older age, fewer years of education and male gender resulted in lower raw scale and index scores. Men performed better on tests of visuospatial function. There were significant differences between test versions. As index scores are already age-adjusted, age was the least significant factor in analysis of index scores. Raw subtest scores (e.g. delayed word recall) were statistically significantly affected by all three factors.
+
+**Conclusions:**
+We present, as far as we are aware, the first European normative data for the RBANS, the largest normative cohort for the RBANS to date, and the only one, to our knowledge, to exclude those with possible prodromal Alzheimer disease on the basis of CSF A$\beta$~1-42~ or p-Tau~181~. We also provide some of the first normative data for RBANS alternative forms B and C. Age, sex and education are important mediators of performance on cognitive tests like the RBANS. In people of higher educational attainment and female sex, failure to adequately correct for these factors may overestimate index scores. We further present a web-based calculator which can be used to generate age, education and sex-adjusted Index score normative data for three versions of the RBANS for clinical or research use.
+
+\newpage
+
+\doublespacing
+
+## Introduction
+
+
+The Repeatable Battery for the Assessment of Neuropsychological Status (RBANS) is an effective clinical tool developed for the detection of dementia (@Randolph1998). It is suitable for the assessment of cognitive function in later life  and  sensitive to cognitive decline in prodromal Alzheimer's disease (AD, @RN83 @RN54 @RN33). The RBANS comprises 12 subtests, including word list learning, symbol-digit substitution and delayed recall and recognition tasks. Normative information from the manual is based on 540 healthy U.S. adults ranging from 20 to 89 years old. There are four English language versions available in order to avoid learning effects from repeated measurement. The handbook for the RBANS provides lookup tables for age-normed indices produced from combinations of groups of individual subtest scores. Previous studies developed both lookup tables and regression-based tools calculated from other normative populations in order to calculate percentile scores after correction for age, gender, education, and race (@Gontkovsky2002, @RN100, @RN18).
+
+Currently, the Delayed Memory index of the RBANS is used as a screening tool for recruitment to randomised controlled trials of putative disease-modifying medicines in AD. The Delayed Memory index is a combination of scores on delayed word list recall and recognition, delayed figure recall and delayed story recall. In clinical trial screening, the measure precedes the use of expensive nuclear imaging or CSF analysis, to exclude probable ineligible candidates. 
+
+The European Prevention of Alzheimer's Disease (EPAD) study collected data on 2,096 people from 30 sites in Europe. Recruits underwent biomarker analysis for molecular diagnosis of prodromal AD, and a battery of cognitive tests including the RBANS, using alternative forms at each visit. The purpose of the current study was to develop updated age, sex and education adjusted normative scores for forms A, B and C of the RBANS in a sample of community-dwelling Caucasian people over 50 years of age in Europe, where prodromal AD could be excluded on the basis of CSF analysis. 
+
+\newpage
+
+## Methods
+
+### Participants and procedure
+Participants (N = 2,069) were recruited from 30 centres across Europe between as part of the European Prevention of Alzheimer's Disease (EPAD) study (EPAD LCS data set V.IMI, doi:10.34688/epadlcs_v.imi_20.10.30.). People recruited to the EPAD study were aged 50 or over, had no dementia diagnosis, were willing to consider taking part in clinical trials, complete study assessments involving memory tests, brain scans and biofluid sampling and had a willing friend or relative to be their study partner.  A full list of EPAD inclusion and exclusion criteria as well as all visit assessments is available on the study website (https://ep-ad.org). The molecular phenotyping of the EPAD cohort has been previously described (@Ingala2021).
+
+### Inclusion and exclusion 
+For the generation of normative scores, EPAD participants were excluded if they had a Clinical Dementia Rating (CDR) scale total scores above zero (@Morris1993). Participants were excluded if they had a CSF amyloid A$\beta$~1-42~ measurement less than 1000pg/ml or p-Tau~181~ >27pg/ml on the Roche Elecsys system at either visit 1 (for Forms A, B and C) or visit 3 (for Form C). The p-Tau~181~ cutoff of 27pg/ml was used in previous studies to determine likelihood of progression (@Blennow2019). Thus, the normative scores are developed in a sample in whom prodromal Alzheimer's Disease is excluded, and who have no impairment of activities of daily living as defined by a CDR global score of 0. In this subsample, we further excluded those with a mini mental state examination (MMSE) score less than 24, or who had a history of head injury (@Folstein1975). People with psychiatric illness which could interfere with cognitive testing were excluded from recruitment to EPAD (@Solomone021017). Nonetheless, we sought to exclude EPAD participants taking antipsychotic medication (n=`r length(ANTIPSYCH)`) or benzodiazepines (n=`r length(BENZOS)`). All of these participants had already been excluded for other reasons.  The selection procedure was repeated for the sample who went on to complete RBANS B at EPAD Visit 2  and RBANS C at EPAD Visit 3. For the minority of people who had CSF sampled at Visit 3, we excluded those who met CSF exclusion criteria as described above. The RBANS was administered in the individual's native language by trained raters according to the country of administration. 
+
+### Data analysis
+Data were analysed in `r R.version.string` in R Studio (@R-base. @tidyverse, @flextable). Separate linear mixed-effect models were created with package lme4 version `r packageVersion('lme4')` (@lme4). Raw subtest scores or age-normed Randolph Index scores were the predicted variable, and age, years of education, and sex as the fixed model predictors, with research site as the random effect (random intercept). Model assumptions were checked using diagnostic plots for linearity, leverage, residuals and effects. Index scores were normalised in the development of the RBANS. Where gaussian model assumptions were breached, this was by left-skewed low-ceiling individual items: line orientation, picture naming, figure copy and list recognition, where high or maximum scores are very common. For these exploratory, left-skewed predicted variables we used zero-inflated linear mixed effects beta regression models with a logit link function to select the statistically significant covariates of largest predictive effect to ease presentation in lookup tables(@Hunger2012, @GLMMTMB). Because of these variables' severe skew, individual lookup tables were generated using an empirical distribution function for the statistically significant covariates for these four raw subtest scores. Diagnostic plots for the linear models can be found in supplementary materials. p-values for mixed-effects models with gaussian residuals were computed using the Welch-Satterthwaite approximation (@Satterthwaite1946, @Luke2016). 
+
+The authors' manuscript was created as reproducible research using RStudio and KnitR. R Markdown and R code are provided in supplementary material (@GANDRUD, @Xie2021-ps). Data access can be separately requested through the Alzheimer's Disease Data Initiative (https://portal.addi.ad-datainitiative.org/) for the reproduction of analyses. 
+
+\newpage
+
+# Results
+## Sample description
+Sample demographics for Forms A, B and C are shown in Table 1. CSF A$\beta$~1-42~ and p-Tau~181~ results were obtained at baseline assessment during visit 1, and only re-assessed during visit 3 for `r csf_samples_visit_3` people. The mean(standard deviation) time elapsed between assessments using Form A and Form B was `r round(time_a_to_b, 1)`(`r round( sd_a_to_b, 1)`) days and between Form B and C was `r round(time_b_to_c, 1)`(`r round( sd_b_to_c, 1)`) days. The maximum total CSF tau, after excluding participants on the basis of CSF A$\beta$~1-42~ and p-Tau~181~ was `r max_t_tau`pg/ml with a median of `r median_t_tau`pg/ml and standard deviation of `r round(sd_t_tau, 1)`pg/ml.
+
+**Table 1: Participants included and excluded at each visit**
+
+Results of the linear mixed effects regression are shown in Tables 2, 3 and 4 for form A, B and C index scores respectively. Results of the linear mixed effects regressions and beta regression models for raw scores are in supplementary tables, alongside lookup tables based on empirical distribution functions.   
+
+## Index and subtest scores
+`r sum(rbans_a_cleaned$Included)` participants were included in the regression analysis for form A. Ages ranges from `r min(abeta_negative_a$age_years)` to `r max(abeta_negative_a$age_years)` years. Years in education ranged from `r min(abeta_negative_a$years_education)` to `r max(abeta_negative_a$years_education)`. Our models and procedures were designed to generate more precise predictions and norms, rather than to evaluate the individual effects of all covariates as if each was appropriately adjusted-for (@Westreich2013). Nonetheless, examining the coefficients may be instructive, and help demonstrate the need for z-score adjustment. Younger age and higher educational attainment were associated with better scores on most indices, as was female gender. Age had its greatest negative effect on the digit-symbol substitution task ("Coding") as might be predicted from acknowledged age-related reductions in speed of processing (@MacDonald2003). Education's effect was to protect against this age-related slowing. However, education's greatest effect was on visuospatial/constructional ability, mediated by its effect on the line orientation task. Female gender had its greatest positive effect on semantic fluency (fruit and vegetables), which has previously been demonstrated to show bias in favour of females (@RN18). however, this was only true for Form A, and the effect was lost in Forms B and C whcih have different fluency categories. Picture naming and list recognition were unaffected by age, sex or educational attainment and ECDF lookup tables for these are therefore left unadjusted (Supplementary tables). There was a significant male advantage on the line orientation task for all versions, leading to higher visuospatial/constructional scores for men as previously demonstrated (@Beatty2003). As expected, age was not significantly associated with the already age-adjusted RBANS Index scores. However, adjusting for educational attainment and sex made sometimes large differences in Z scores from the original normative data.
+
+
+**Table 2 (Normative equations for Form A)**
+
+
+##  Form B
+`r sum(rbans_b_cleaned$Included)` participants were included in the regression analysis for Form B. Ages ranged from `r min(abeta_negative_b$age_years)` to `r max(abeta_negative_b$age_years)` years. Years in education ranged from `r min(abeta_negative_b$years_education)` to `r max(abeta_negative_b$years_education)`. Younger age and higher educational attainment remained associated with better scores on most indices and subtests, as was female gender. The female advantage on the language index was no longer apparent.  
+
+**Table 3 (Normative equations for Form B)**
+
+
+## Form C
+
+`r sum(rbans_c_cleaned$Included)` participants were included in the regression analysis for Form C. Ages ranged from `r min(abeta_negative_c$age_years)` to `r max(abeta_negative_c$age_years)` years. Years in education ranged from `r min(abeta_negative_c$years_education)` to `r max(abeta_negative_c$years_education)`. Male advantage in visuospatial function was maintained with female advantage on all other domains except language. 
+
+**Table 4 (Normative equations for Form C)**
+
+
+```{r,  echo=FALSE, message=FALSE}
+EXAMPLE_AGE = 78
+EXAMPLE_SEX = 0 # female
+EXAMPLE_YOE = 16
+EXAMPLE_RAW = 90
+MODEL <- normal_models_a$`Delayed memory index`
+FIXEF <- fixef(MODEL)
+EXAMPLE_SIGMA = as.numeric(sigma(MODEL))
+EPAD_ADJUST = as.numeric(FIXEF[1]) + EXAMPLE_SEX*as.numeric(FIXEF[2]) + EXAMPLE_AGE*as.numeric(FIXEF[3])+ EXAMPLE_YOE*as.numeric(FIXEF[4])
+EPAD_Z = (EXAMPLE_RAW -EPAD_ADJUST)/EXAMPLE_SIGMA
+```
+
+A given raw or age-adjusted (Randolph) index score can be corrected for age, education and sex by:
+
+1.  Generating a predicted score based on the regression coefficients
+2.  Subtracting the model's predicted score from the actual score
+3.  Calculating a z-score by dividing the difference by the model sigma (residual error or sd(Observations)). 
+4.  This z-score is transformed to a new index score by multiplying by 15 and adding to 100.
+
+
+For example (Form A): for a `r EXAMPLE_AGE` year old woman (F=0, M=1), whose age-adjusted Delayed Memory Index is `r EXAMPLE_RAW`, who has `r EXAMPLE_YOE` years of education (e.g. a 3-year bachelor's degree):
+
+EPAD predicted = `r round(as.numeric(FIXEF[1]), 2)` + (`r EXAMPLE_SEX` x `r round(as.numeric(FIXEF[2]), 2)`) + (`r EXAMPLE_AGE` x `r round(as.numeric(FIXEF[3]), 2)`) + (`r EXAMPLE_YOE` x `r round(as.numeric(FIXEF[4]), 2)`)
+
+z-score = (Observed score - EPAD predicted) / model sigma 
+
+z-score = (`r EXAMPLE_RAW` - `r round(EPAD_ADJUST, 2)`) / `r round(EXAMPLE_SIGMA, 2)` = `r round(EPAD_Z, 2)`
+
+Adjusted Index score = 100 + (z-score x 15) = `r round(100+(EPAD_Z*15), 2)`
+
+\newpage
+
+## Discussion and limitations
+Age, education and gender have large influences on cognitive performance on the RBANS (@RN100). Existing normative data is over 20 years old and was developed in an American population before widespread AD biomarker availability. To our knowledge this is the first normative cohort for the RBANS in Europeans. It is the first normative cohort in whom prodromal AD, as defined by low CSF A$\beta$~1-42~ or high p-Tau~181~, can be excluded. Educational attainment differs across generations and therefore updated education-adjusted norms are likely to be better indicators of the true normal population of older people than historical norms.
+
+To our knowledge these are the first normative scores available for Forms B and C of the RBANS. As diagnosis becomes more and more focused on mild cognitive impairment, it is likely that repeated measures will be increasingly important, and therefore that normative scores on RBANS forms B and C will be particularly useful (@Dunne2021).
+
+We assumed that those who had CSF A$\beta$~1-42~ over 1000pg/ml or p-Tau~181~ under 27pg/ml at Visit 1, would remain biomarker negative at Visit 3 some 12 months later, unless they were in the minority who were re-tested and had positive results. 
+
+Our study included almost solely Caucasians, which is a limitation. There is a significant effect of race on the performance of subjects from the United States (@RN100). The development of culturally and racially representative cognitive tests is an ongoing challenge in neuropsychology, and as such is outside the scope of the current work. The increasing availability of fluid biomarkers for AD will allow measurement of such tests' sensitivity and specificity cross-sectionally, although longitudinal studies will be required in order to strengthen prognostication in those with, for example, Mild Cognitive Impairment.
+
+Our study only includes participants between `r maxage` and `r minage` years of age, so the use of these normative scores is not recommend outside this age range, or outside the range of educational attainment in the sample.
+
+The sample is large, and represents people from multiple European cultures and languages. This offers greater precision in estimating equations and potentially greater ecological validity.
+
+Data are presented as is traditional for such regression models, but readers should take note that prediction and not explanation is the purpose of the regression models. Therefore, all available data should be used (not just 'statistically significant' predictor variables) in using these regression-based adjustments (@Harrell2015). 
+
+The EPAD participants were recruited on the understanding they would likely participate in a clinical trial. This means they were likely better informed and in higher socioeconomic groups than the European population at large. EU statistics demonstrate that 22% of people aged 55-74 have tertiary educational attainment, growing at approximately 5% per decade (@Eurostat2022). In our cohort,  the median educational attainment was `r median(rbans_a_cleaned$years_education, na.rm=T)`. This is likely to mean the educational adjustment presented here remains valid for some time to come. 
+
+\newpage
+
+## Supplementary material
+Supplementary material, including a directory of all of the R scripts used in the generation of the authors' manuscript, are available from the publisher's website as a .zip file. The authors provide a web-based scoring tool, written in client-side Javascript (no data is transmitted) for the use of clinicians and researchers. The web application uses regression-based tools to calculate EPAD, Duff or Randolph norms, and will aim to add others for diverse populations. The calculator also allows associated supplementary indices for the RBANS (Effort Index, Cortical-Subcortical scale). It will be updated annually. 
+
+\newpage
+## Authors' contributions
+
+RD performed the data analysis and prepared the manuscript and web-based calculator. RD was a local investigator for the EPAD study. CWR and AB supervised the preparation of the manuscript, and CWR led the EPAD study. All authors had access to study data, which is publicly available on application. 
+
+
+\newpage
+ 
+## Acknowledgements 
+EPAD LCS is registered at www.clinicaltrials.gov Identifier: NCT02804789. Data used in preparation of this article were obtained from the EPAD LCS data set V.IMI, doi:10.34688/epadlcs_v.imi_20.10.30. This work used data and/or samples from the EPAD project which received support from the EU/EFPIA Innovative Medicines Initiative Joint Undertaking
+EPAD grant agreement n° 115736 and an Alzheimer's Association Grant (SG 21-818099-EPAD).
+
+*Data used in preparation of this article were obtained from the Longitudinal Cohort Study (LCS), delivered by the European Prevention of Alzheimer's Disease (EPAD) Consortium. As such investigators within the EPAD LCS and EPAD Consortium
+contributed to the design and implementation of EPAD and/or provided data but did not participate in analysis or writing of this report. A complete list of EPAD Investigators can be found at:
+http://ep-ad.org/wp-content/uploads/2020/12/202010_List-of-epadistas.pdf
+
+Data on educational attainment of Europeans was sourced from https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_03.tsv.gz on the 26th of April 2022. 
+
+
+## References
+
+
+

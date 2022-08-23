@@ -1,0 +1,40 @@
+---
+output: 
+  officedown::rdocx_document:
+    reference_docx: tablestemplate.docx
+    tables:
+      style: RmdTable
+---
+<!---BLOCK_LANDSCAPE_START--->
+
+# Tables  
+
+
+```{r, echo=FALSE, results=FALSE, message=FALSE, warning=FALSE, fig.show='hide'}
+source('./load_packages.R')
+source("./eda.R")
+library(officedown)
+```
+
+```{r tab.cap="**(Demographics for included and excluded cohorts for forms A, B and C)**", tab.id = "tab4", tab.cap.style = "Table Caption", echo=FALSE}
+table_one
+```
+
+\newpage
+```{r echo=FALSE, tab.cap="**(Normative equations for Form A)**", tab.id = "tab4", tab.cap.style = "Table Caption", echo=FALSE}
+table_two
+```
+
+\newpage
+```{r echo=FALSE, tab.cap="**(Normative equations for Form B)**", tab.id = "tab4", tab.cap.style = "Table Caption", echo=FALSE}
+table_three
+```
+
+\newpage
+```{r tab.cap="**(Normative equations for Form C)**", tab.id = "tab4", tab.cap.style = "Table Caption", echo=FALSE}
+table_four
+```
+
+<!---BLOCK_LANDSCAPE_END--->
+
+

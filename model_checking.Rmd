@@ -1,0 +1,86 @@
+---
+title: "Supplementary Data: Model checks"
+author: "Ross A. Dunne"
+date: "4/26/2022"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+source('./eda.R')
+```
+# Simple Data summaries
+
+## Form A Descriptive Statistics
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+### I'm a bit worried that figure_copy, line orientation and list recog and 
+# picture naming are not going to be exactly normal in the residuals
+abeta_negative_a %>% select(starts_with("rbans")) %>% datasummary_skim()
+# pop this in the statistical summary in Supplementary data 
+```
+## Form B Descriptive Statistics
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+### I'm a bit worried that figure_copy, line orientation and list recog and 
+## # picture naming are not going to be exactly normal in the residuals
+
+abeta_negative_b %>% select(starts_with("rbans")) %>% datasummary_skim()
+
+# pop this in the statistical summary in Supplementary data 
+```
+
+## Form C Descriptive Statistics
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+### I'm a bit worried that figure_copy, line orientation and list recog and 
+# picture naming are not going to be exactly normal in the residuals
+abeta_negative_c %>% select(starts_with("rbans")) %>% datasummary_skim()
+# pop this in the statistical summary in Supplementary data 
+```
+
+# Model Checking
+
+## Form A Model Checks
+```{r echo=FALSE, fig.width=12, fig.height=8, message=FALSE, warning=FALSE}
+
+# ------------ Model Diagnostics ---------------------- #
+normal_models_a %>% lapply(FUN=performance::check_model)
+```
+## Form A Effects
+```{r echo=FALSE, fig.width=12, fig.height=8, message=FALSE, warning=FALSE}
+# ------------ Model Effects ---------------------- #
+effects <- normal_models_a %>% lapply(FUN=ggeffects::ggpredict)
+plot_wrapper <- function(ds){
+  plot(ds, residuals=TRUE, add.data=TRUE, residuals=TRUE, residuals.line=TRUE)
+}
+lapply(effects, FUN=plot_wrapper)
+```
+
+## Form B Model Checks
+```{r echo=TRUE, fig.width=12, fig.height=8, message=FALSE, warning=FALSE}
+
+# ------------ Model Diagnostics ---------------------- #
+normal_models_b %>% lapply(FUN=performance::check_model)
+```
+
+## Form B Effects
+```{r echo=TRUE, fig.width=12, fig.height=8, message=FALSE, warning=FALSE}
+# ------------ Model Effects ---------------------- #
+effects_b <- normal_models_b %>% lapply(FUN=ggeffects::ggpredict)
+lapply(effects_b, FUN=plot_wrapper)
+```
+
+
+## Form C Model Checks
+```{r echo=TRUE, fig.width=12, fig.height=8, message=FALSE,warning=FALSE}
+
+# ------------ Model Diagnostics ---------------------- #
+normal_models_c %>% lapply(FUN=performance::check_model)
+```
+
+## Form C Effects
+```{r echo=FALSE, fig.width=12, fig.height=8, message=FALSE, warning=FALSE}
+# ------------ Model Effects ---------------------- #
+effects_c <- normal_models_c %>% lapply(FUN=ggeffects::ggpredict)
+lapply(effects_c, FUN=plot_wrapper)
+```

@@ -1,0 +1,18 @@
+# install required packages
+install.packages("lme4")
+install.packages("lmerTest")
+install.packages('tidyverse')
+install.packages("flextable")
+install.packages("broom")
+install.packages("caret")
+install.packages("ROCR")
+install.packages("cutpointr")
+install.packages("fANCOVA") # this is a cutpointr dependency
+install.packages("performance")
+install.packages('ggeffects')
+install.packages("broom.mixed")
+install.packages("modelsummary")
+install.packages("modelplot")
+install.packages("glmmTMB")
+install.packages("gtsummary")
+install.paclages("officedown")

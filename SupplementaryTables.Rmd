@@ -1,0 +1,142 @@
+---
+title: "Supplementary Tables"
+output:
+  html_document:
+    df_print: paged
+classoption: landscape
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+source('./eda.R')
+```
+# Supplementary tables for RBANS form A
+
+
+## Using the ECDF lookup tables
+In the rightmost columns select the row containing the combination of factors which best applies to your subject/participant, then select the column with the corresponding subtest score. For example: 
+for a female participant aged 55, with 15-19 years of education and a score of 18 on line orientation on Form A, the corresponding percentile is 55 [Table S2 highlighted]. For those without adjustment (picture naming and list recognition), simply read the percentile from the score in the corresponding column. 
+
+
+\newpage
+Table S1. Mixed effects Beta regression models summary for RBANS form A
+```{r}
+supplementary_table_x 
+```
+
+\newpage
+Table S2. ECDF percentile lookup table for form A Line orientation 
+```{r}
+supplementary_table_one %>% highlight(i=3, j=3, color="yellow", part="body")
+```
+\newpage
+Table S3. ECDF percentile lookup table for form A Figure copy
+```{r}
+supplementary_table_two
+```
+\newpage
+Table S4. ECDF percentile lookup table for form A list recognition
+```{r}
+supplementary_table_three
+```
+\newpage
+Table S5. ECDF percentile lookup table for form A picture naming
+```{r}
+supplementary_table_four
+```
+\newpage
+
+# Supplementary tables for RBANS form B
+
+
+Table S6. Mixed effects Beta regression models summary for RBANS form B
+```{r}
+supplementary_table_y
+```
+
+\newpage
+Table S7. ECDF percentile lookup table for form B Line orientation 
+```{r}
+supplementary_table_five
+```
+\newpage
+Table S8. ECDF percentile lookup table for form B Figure copy
+```{r}
+supplementary_table_six
+```
+\newpage
+Table S9. ECDF percentile lookup table for form B list recognition
+```{r}
+supplementary_table_seven
+```
+\newpage
+Table S10. ECDF percentile lookup table for form B picture naming
+```{r}
+supplementary_table_eight
+```
+\newpage
+
+# Supplementary tables for RBANS form C
+
+
+
+Table S11. Mixed effects Beta regression models summary for RBANS form C
+```{r}
+supplementary_table_z
+```
+
+\newpage
+Table S12. ECDF percentile lookup table for form C Line orientation 
+```{r}
+supplementary_table_nine
+```
+\newpage
+Table S13. ECDF percentile lookup table for form A Figure copy
+```{r}
+supplementary_table_ten
+```
+\newpage
+Table S14. ECDF percentile lookup table for form A list recognition
+```{r}
+supplementary_table_eleven
+```
+\newpage
+Table S15. ECDF percentile lookup table for form A picture naming
+```{r}
+supplementary_table_twelve
+```
+\newpage
+## Using the regression tables 
+As described in the results section of the main manuscript, in order to use a regression model to estimate percentile scores for a particular subtest:
+1. Calculate the predicted score for age, sex and education from the regression coefficients
+2. Subtract the predicted score from the actual score
+3. Divide your answer by the model sigma (sd_Observation) in the table
+4. This is a Z score, which can be converted to a percentile score using supplementary table 19
+
+\newpage
+
+Table S16. Gaussian Linear mixed effects models for Form A subtest scores
+```{r}
+supplementary_table_thirteen
+```
+\newpage
+Table S17. Gaussian Linear mixed effects models for Form B subtest scores
+```{r}
+supplementary_table_fourteen
+```
+\newpage
+Table S18. Gaussian Linear mixed effects models for Form C subtest scores
+```{r}
+supplementary_table_fifteen
+```
+\newpage
+# How to use a Z-table
+
+In order to look up a percentile from the Z table, simply find the row which corresponds to the first two significant numbers (e.g. 0.4) and follow along until you find the column with the number in the next  decimal place (e.g. 0.04). This will be the percentile value corresponding to a Z value of 0.44 (67.00). For Z values less than zero simply subtract the percentile from 100. A Z score of -0.44 corresponds to 100-67 or the 33rd percentile.
+
+\newpage
+Table S19. Z table for percentile lookup
+```{r}
+ztable %>% color(i = 5, j = 6, "red", part = "body")
+```
