@@ -32,9 +32,6 @@ The model checking script produces a 40MB graphics-laden file. I did not include
 ## Roads not taken
 For the other predicted variables, another option would be quantile regression. Also, the models are linear, and might benefit from additional complexity using restricted cubic spline functions to allow age, for example, to have non-linear effects. Another option other than the lookup tables would be nomograms. However, I felt that these levels of complexity would be a barrier to understanding of people using the calculator (for example), and that transparency was key. 
 
-## Stars
-Please forgive me. I would have liked not to use these in the tables, and I personally object to their ubiquity, but my experience is that their absence is more noted by reviewers than their presence. They are easily ignored, and as I mention in the text, the purpose of the models is *prediction*, not the measurement of impact of covariates, although I have indulged in that a little, to my shame. 
-
 ## References
 References are provided as a .bib file. To read these seperately you can use JabREF (https://www.jabref.org/)  or similar free software. A significant number of references in this file do not appear in the document but they have been included for the reader's convenience and for the purposes of completeness of scholarship.
 
