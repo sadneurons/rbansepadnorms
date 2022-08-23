@@ -23,7 +23,7 @@ model_checking.html : *Heavy graphical model checking detail*
 ## Structure and run order
 The file 'eda.R' contains the main extraction, cleaning and analysis functions. It is obviously difficult to understand all of these without access to the data, but the file is provided with line-by line comments to guide the reader. The Manuscript File "DraftRBANSEPADNormsAug2022.RMD" uses the *source* command to run *'eda.r'* as do the other *RMD* files, in order to prevent de-linking the data. This is not the most efficient method of running the files, but it does mean that with access to the data, all tables and supplementary tables can be recreated using simply the *knit* command/button in RStudio. If it means your having another cup of coffee while the script builds then... I'm buying.
 
-## Practicalities and sanity
+## Practicalities
 I recommend for the purposes of your own time and effort that you knit the documents to HTML format rather than *docx* as I have not included the template files used to create line and page numbering, double spacing etc. Your knit document won't look very nice and may be difficult to read. Although, the content should be 99% the same and the tables and data will obviously all be identical, but it will just be nicer to look at in HTML and you can use your favourite browser.
 
 ## Model checking
