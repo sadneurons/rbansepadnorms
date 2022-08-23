@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="visuo.js"></script>
+    <script type="text/javascript" src="GetPercentFromZ.js"></script>
+    <script type="text/javascript" src="immediate.js"></script>
+    <script type="text/javascript" src="attention.js"></script>
+    <script type="text/javascript" src="language.js"></script>
+    <script type="text/javascript" src="delayed_memory.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
+    <link rel="stylesheet" href="styles.css">    <meta charset="UTF-8">
+    <title>RBANS Calculator</title>
+</head>
+<body>
+<div class="topdiv">
+<h1>RBANS Calculator and Supplementary Analysis</h1>
+    <div class="dropdownmenu">
+    <label for="norm">Choose a norm:</label>
+
+    <select name="norm" id="norm" class="norm-select" onchange=calculate()>
+        <option value="randolph">Randolph</option>
+        <option value="duff">Duff(2015)</option>
+        <!--- <option value="olaithe">Olaithe(2019)</option> --->
+        <option value="epada">EPAD(A)</option>
+        <option value="epadb">EPAD(B)</option>
+        <option value="epadc">EPAD(C)</option>
+    </select>
+    </div>
+</div>
+<div class="container-div">
+    <div class="rendered-form">
+        <div class="formbuilder-number form-group">
+            <label for="topf" class="formbuilder-number-label">TOPF</label>
+            <input type="number" class="form-control" name="topf" access="false" id="topf" value="35">
+        </div>
+        <div class="formbuilder-number form-group">
+            <label for="age" class="formbuilder-number-label">Age</label>
+            <input type="number" class="form-control" name="age" access="false" id="age" value="75">
+        </div>
+        <div class="formbuilder-number form-group">
+            <label for="years_of_education" class="formbuilder-number-label">Years of Education</label>
+            <input type="number" class="form-control" name="years_of_education" value="17" access="false" id="years_of_education">
+        </div>
+        <div class="formbuilder-radio form-group" id="gender_radio">
+            <label for="gender_radio" class="formbuilder-number-label">Assigned Gender at birth</label>
+            <div class="radio-btn">
+                <input type="radio" id="Male" name="assigned_gender_at_birth" value="Male" checked>
+                <label for="Male" class="radio-labl">Male</label><br>
+                <input type="radio" id="Female" name="assigned_gender_at_birth" value="Female">
+                <label for="Female" class="radio-labl">Female</label><br><br>
+            </div>
+        </div>
+
+
+        <div class="formbuilder-radio form-group" id="ethnicity_radio">
+            <label for="ethnicity_radio" class="formbuilder-number-label">Ethnicity (for Duff norms)</label>
+            <div class="radio-btn">
+                <input type="radio" id="White" name="ethnicity" value="White" checked>
+                <label for="White" class="radio-labl">White</label><br>
+                <input type="radio" id="Non-White" name="ethnicity" value="Non-White">
+                <label for="Non-White" class="radio-labl">Non-White</label><br><br>
+            </div>
+        </div>
+
+        <div class="formbuilder-number form-group d-column">
+            <label for="listlearning" class="formbuilder-number-label">List Learning</label>
+            <div class="formbuilder-number"><input class="range" id="listlearning" name="listlearning" type="range" value="0" min="0" max="40" step="1"
+                                                   onmousemove="learnvalue.value=value" onchange="learnvalue.value=value">
+                <output id="learnvalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="storylearning" class="formbuilder-number-label">Story Learning</label>
+            <div class="formbuilder-number"><input class="range" id="storylearning" name="storylearning" type="range" value="0" min="0" max="24" step="1"
+                                                   onmousemove="storyvalue.value=value" onchange="storyvalue.value=value">
+                <output id="storyvalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="figurecopy" class="formbuilder-number-label">Figure Copy</label>
+            <div class="formbuilder-number"><input class="range" id="figurecopy" name="figurecopy" type="range" value="0" min="0" max="20" step="1"
+                                                   onmousemove="figurevalue.value=value" onchange="figurevalue.value=value">
+                <output id="figurevalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="lineorientation" class="formbuilder-number-label">Line Orientation</label>
+            <div class="formbuilder-number"><input class="range" id="lineorientation" name="lineorientiation" value="0" type="range" min="0" max="20"
+                                                   step="1" onmousemove="linevalue.value=value" onchange="linevalue.value=value">
+                <output id="linevalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="naming" class="formbuilder-number-label">Picture Naming</label>
+            <div class="formbuilder-number"><input class="range" id="naming" name="naming" type="range" value="0" min="0" max="10" step="1"
+                                                   onmousemove="namevalue.value=value" onchange="namevalue.value=value">
+                <output id="namevalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="semanticfluency" class="formbuilder-number-label">Semantic Fluency</label>
+            <div class="formbuilder-number"><input class="range" id="semanticfluency" name="semanticfluency" value="0" type="range" min="0" max="40" step="1"
+                                                   onmousemove="semanticvalue.value=value" onchange="semanticvalue.value=value">
+                <output id="semanticvalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="digitspan" class="formbuilder-number-label">Digit Span</label>
+            <div class="formbuilder-number"><input class="range" id="digitspan" name="digitspan" type="range" value="0" min="0" max="16" step="1"
+                                                   onmousemove="digitvalue.value=value" onchange="digitvalue.value=value">
+                <output id="digitvalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="coding" class="formbuilder-number-label">Coding</label>
+            <div class="formbuilder-number"><input class="range" id="coding" name="coding" type="range" value="0" min="0" max="89" step="1"
+                                                   onmousemove="codingvalue.value=value" onchange="codingvalue.value=value">
+                <output id="codingvalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="listrecall" class="formbuilder-number-label">List Recall</label>
+            <div class="formbuilder-number"><input class="range" id="listrecall" name="listrecall" type="range" value="0" min="0" max="10" step="1"
+                                                   onmousemove="recallvalue.value=value" onchange="recallvalue.value=value">
+                <output id="recallvalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="listrecog" class="formbuilder-number-label">List Recognition</label>
+            <div class="formbuilder-number"><input class="range" id="listrecog" name="listrecog" type="range" min="0" value="0" max="20" step="1"
+                                                   onmousemove="recognitionvalue.value=value" onchange="recognitionvalue.value=value">
+                <output id="recognitionvalue">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="storyrecall" class="formbuilder-number-label">Story Recall</label>
+            <div class="formbuilder-number"><input class="range" id="storyrecall" name="storyrecall" type="range" value="0" min="0" max="12" step="1"
+                                                   onmousemove="storyvalue1.value=value" onchange="storyvalue1.value=value">
+                <output id="storyvalue1">0</output>
+            </div>
+        </div>
+        <div class="formbuilder-number form-group d-column">
+            <label for="figurerecall" class="formbuilder-number-label">Figure Recall</label>
+            <div class="formbuilder-number"><input class="range" id="figurerecall" name="figurerecall" type="range" value="0" min="0" max="20" step="1"
+                                                   onmousemove="figurevalue1.value=value" onchange="figurevalue1.value=value">
+                <output id="figurevalue1">0</output>
+            </div>
+        </div>
+        <div class="form-button-calculate">
+            <button type="button" onclick=calculate()>Calculate</button>
+        </div>
+    </div>
+
+    <div id="report">
+        <div id="letterdiv">
+            <div class="letter" id="topf_letter"></div>
+            <div class="table-bordered" id="results_table"></div>
+            <div class="graph" id="tester" style="width:800px;height:800px;"></div>
+            <div class="legend" id="graph_legend"></div>
+            <div class="letter" id="immediate_memory_letter"></div>
+            <div class="letter" id="visuospatial_letter"></div>
+            <div class="letter" id="language_letter"></div>
+            <div class="letter" id="attention_letter"></div>
+            <div class="letter" id="delayed_memory_letter"></div>
+            <div class="letter" id="overall_rbans_letter"></div>
+            <div class="letter" id="silverberg_index_letter"></div>
+            <div class="letter" id="cortical-subcortical"></div>
+            <div class="letter" id="garcia-letter"></div>
+            <div class="letter" id="references"></div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="rbansgraph.js"></script>
+<script type="text/javascript" src="rbanscalculate.js"></script>
+</html>

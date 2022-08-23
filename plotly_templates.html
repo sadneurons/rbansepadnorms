@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
+
+    <title>Plotly tests</title>
+</head>
+<body>
+<div id="tester" style="width:800px;height:800px;"></div>
+<script>
+
+TESTER = document.getElementById('tester');
+
+
+var trace1 = {
+x: ["Immediate Memory", "Visuospatial/Constructional", "Language", "Attention", "Delayed Memory"],
+y: [81, 96, 92, 82, 78 ],
+    mode: 'lines+markers',
+    error_y: {
+type:"scatter",
+        array: [0, 0, 0, 0, 0],
+        visible: true
+    },
+    marker: {
+        color: 'rgb(17, 157, 255)',
+        size: 10,
+        line: {
+            color: 'rgb(128, 0, 128)',
+            width: 2,
+        },
+    },
+
+
+};
+
+var trace2 = {
+    x: ["Immediate Memory", "Visuospatial/Constructional", "Language", "Attention", "Delayed Memory"],
+    y: [81, 96, 92, 82, 93 ],
+    name: 'yaxis2 data',
+    yaxis: 'y2',
+    type: 'scatter',
+    opacity: 0.0,
+};
+
+var trace3 = {
+    x: ["Total Scale"],
+    y: [100],
+    name: 'overall',
+    xaxis: 'x2',
+    yaxis: 'y3',
+    mode: 'lines+markers',
+    error_y: {
+        type:"scatter",
+        array: [0, 0, 0, 0, 0],
+        visible: true
+    },
+    marker: {
+        color: 'rgb(17, 157, 255)',
+        size: 10,
+        line: {
+            color: 'rgb(128, 0, 128)',
+            width: 2,
+            dash: 'dash',
+        },
+    },
+};
+
+var trace4 = {
+    x: ["Immediate Memory", "Visuospatial/Constructional", "Language", "Attention", "Delayed Memory"],
+    y: [78, 90, 100, 87, 82 ],
+    mode: 'lines+markers',
+    error_y: {
+        type:"scatter",
+        array: [0, 0, 0, 0, 0],
+        visible: true
+    },
+    dash: 'dash',
+    marker: {
+        color: 'rgb(255, 102, 0)',
+        size: 10,
+        line: {
+            color: 'rgb(128, 0, 128)',
+            width: 2,
+        },
+    },
+
+
+};
+
+var trace5 = {
+    x: ["Total Scale"],
+    y: [90],
+    name: 'overall',
+    xaxis: 'x2',
+    yaxis: 'y3',
+    mode: 'lines+markers',
+    error_y: {
+        type:"scatter",
+        array: [0, 0, 0, 0, 0],
+        visible: true
+    },
+    marker: {
+        color: 'rgb(255, 102, 0)',
+        size: 10,
+        line: {
+            color: 'rgb(128, 0, 128)',
+            width: 2,
+        },
+    },
+};
+
+
+var plot_data = [trace1, trace2, trace3, trace4, trace5];
+
+var layout = {
+
+    title: 'RBANS Indices',
+    showlegend: false,
+    xaxis: {
+        domain: [0, 0.8],
+        title: 'Cognitive domain',
+        titlefont: {
+            family: 'Arial, sans-serif',
+            size: 16,
+            color: 'lightgrey'
+        },
+        autotick: false,
+        ticks: 'outside',
+        zeroline: true,
+        tick0: 0,
+        dtick: 0.25,
+        ticklen: 0,
+        tickwidth: 4,
+        tickcolor: '#000',
+        type:'category',
+    },
+    yaxis: {
+            title: 'Index score',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18,
+                color: 'lightgrey'
+            },
+        autotick: false,
+        ticks: 'outside',
+        tick0: 0,
+        dtick:5,
+        ticklen: 0,
+        tickwidth: 0,
+        tickcolor: '#000',
+        range:[40,160],
+
+    },
+    yaxis3: {
+        title: 'Percentile',
+        titlefont: {
+            family: 'Arial, sans-serif',
+            size: 18,
+            color: 'lightgrey'
+        },
+        autotick: false,
+        ticks: 'outside',
+        tick0: 0,
+        dtick:5,
+        ticklen: 0,
+        tickwidth: 0,
+        tickcolor: '#000',
+        range:[40,160],
+        overlaying: 'y',
+        side: 'right',
+        dtick:5,
+        tickmode: "array", // If "array", the placement of the ticks is set via `tickvals` and the tick text is `ticktext`.
+        tickvals: [40,45,50,55,60,65,70,75,80,85,90,95, 100, 105, 110,115,120,125,130,135,140,145,150,155,160],
+        ticktext: ['<0.1', '<0.1', '<0.1', '0.1', '0.4', '1', '2', '5', '9', '14', '25', '37', '50', '63',
+            '75', '84','91','95', '98', '99', '99.6', '99.9', '>99.9', '>99.9', '>99.9'],
+    },
+    yaxis2: {
+        title: 'Percentile',
+        titlefont: {
+            family: 'Arial, sans-serif',
+            size: 18,
+            color: 'lightgrey'
+        },
+        autotick: false,
+        ticks: 'outside',
+        tick0: 0,
+        dtick:5,
+        ticklen: 0,
+        tickwidth: 0,
+        tickcolor: '#000',
+        range:[40,160],
+        overlaying: 'y',
+        side: 'right',
+        dtick:5,
+        tickmode: "array", // If "array", the placement of the ticks is set via `tickvals` and the tick text is `ticktext`.
+        tickvals: [40,45,50,55,60,65,70,75,80,85,90,95, 100, 105, 110,115,120,125,130,135,140,145,150,155,160],
+        ticktext: ['<0.1', '<0.1', '<0.1', '0.1', '0.4', '1', '2', '5', '9', '14', '25', '37', '50', '63',
+        '75', '84','91','95', '98', '99', '99.6', '99.9', '>99.9', '>99.9', '>99.9'],
+    },
+    xaxis2: {
+        domain: [0.9, 1],
+        anchor: 'y3',
+        autotick: true,
+    },
+//Line Horizontal
+    shapes: [
+        {
+            type: 'line',
+            x0: 0,
+            y0: 100,
+            x1: 4,
+            y1: 100,
+            color: 'rgb(0, 102, 0)',
+            width: 0,
+            opacity:0.2,
+
+        },
+{
+    type: 'rect',
+    xref: 'x',
+    yref: 'y',
+        x0: 0,
+    y0: 115,
+    x1: 4,
+    y1: 85,
+    line: {
+    color: 'rgb(204, 255, 204)',
+        width: 0},
+    fillcolor: 'rgb(204, 255, 204)',
+    opacity:0.2,
+},
+        {
+            type: 'rect',
+            xref: 'x',
+            yref: 'y',
+            x0: 0,
+            y0: 85,
+            x1: 4,
+            y1: 70,
+            line: {
+                color: 'rgb(153, 255, 153)',
+                width: 0},
+            fillcolor: 'rgb(153, 255, 153)',
+            opacity:0.2,
+        },
+
+        {
+            type: 'rect',
+            xref: 'x',
+            yref: 'y',
+            x0: 0,
+            y0: 70,
+            x1: 4,
+            y1: 55,
+            line: {
+                color: 'rgb(77, 255, 77)',
+                width: 0},
+            fillcolor: 'rgb(77, 255, 77)',
+            opacity:0.2,
+        },
+        {
+            type: 'rect',
+            xref: 'x',
+            yref: 'y',
+            x0: 0,
+            y0: 115,
+            x1: 4,
+            y1: 130,
+            line: {
+                color: 'rgb(153, 255, 153)',
+                width: 0},
+            fillcolor: 'rgb(153, 255, 153)',
+            opacity:0.2,
+        },
+
+        {
+            type: 'rect',
+            xref: 'x',
+            yref: 'y',
+            x0: 0,
+            y0: 130,
+            x1: 4,
+            y1:145,
+            line: {
+                color: 'rgb(77, 255, 77)',
+                width: 0},
+            fillcolor: 'rgb(77, 255, 77)',
+            opacity:0.2,
+        },
+        {
+            type: 'rect',
+            xref: 'x',
+            yref: 'y',
+            x0: 0,
+            y0: 145,
+            x1: 4,
+            y1: 160,
+            line: {
+                color: 'rgb(0, 204, 0)',
+                width: 0},
+            fillcolor: 'rgb(0, 204, 0)',
+            opacity:0.2,
+        },
+        {
+            type: 'rect',
+            xref: 'x',
+            yref: 'y',
+            x0: 0,
+            y0: 55,
+            x1: 4,
+            y1: 40,
+            line: {
+                color: 'rgb(0, 204, 0)',
+                width: 0},
+            fillcolor: 'rgb(0, 204, 0)',
+            opacity:0.2,
+        },
+
+
+
+
+    ],
+};
+
+Plotly.newPlot('tester', plot_data, layout);
+
+</script>
+
+</body>
+</html>
