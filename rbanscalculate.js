@@ -1,22 +1,144 @@
+function ageCode(age) {
+    // TODO: add a check that age is less than 90
+    if (age > 79) {
+    return 3;
+    } else if (age < 79  && age >= 70) {
+    return 2;
+    } else if (69 >= age && age >= 60) {
+    return 1;
+    } else if (59 >= age && age >= 50) {
+    return 0;
+    }
+}
+
+function sexBeta(sex){
+    // TODO: Some error checking regarding passed values
+    // Returns "1" for Male and "0" for Female
+    // Acccording to the Duff regression formulae
+    if (sex == "Male") {
+        var sexbeta = 1;
+    }
+    else if (sex == "Female") {
+        var sexbeta = 0;
+    }
+    return sexbeta
+}
+
+function ethnicBeta(ethnicity){
+    // Ethnicity in Duff et al. is coded as White (non-hispanic)
+    // versus non-White
+    if (ethnicity == "White") {
+        var ethnicbeta = 1;
+    }
+    else
+        { var ethnicbeta = 0;}
+    return ethnicbeta
+}
+
+function yearsOfEducation(yoe){
+    // TODO: Implement some error checking
+    // Returns an integer code for the relevant years of education completed
+    // var years_of_education = parseInt(document.getElementById('years_of_education').value);
+    if (yoe < 12){
+        return 1;
+    }
+    else if (yoe == 12){
+        return 2;
+    }
+    else if (yoe > 12 && yoe < 16){
+        return 3;
+    }
+    else if (yoe >= 16){
+        return 4;
+    }
+}
 
 
-function calculate() {
-    var list_recall = parseInt(document.getElementById('listrecall').value)
-    var list_recog = parseInt(document.getElementById('listrecog').value)
-    var story_recall = parseInt(document.getElementById('storyrecall').value)
-    var figure_recall = parseInt(document.getElementById('figurerecall').value)
-    var delayed_memory = list_recall + story_recall + figure_recall
-    var storylearning = parseInt(document.getElementById('storylearning').value)
-    var listlearning = parseInt(document.getElementById('listlearning').value)
-    var naming = parseInt(document.getElementById('naming').value)
-    var semanticfluency = parseInt(document.getElementById('semanticfluency').value)
-    var coding = parseInt(document.getElementById('coding').value)
-    var digit_span = parseInt(document.getElementById('digitspan').value)
-    var figure_copy = parseInt(document.getElementById('figurecopy').value)
-    var line_orientation = parseInt(document.getElementById('lineorientation').value)
-    var age = parseInt(document.getElementById('age').value)
-    var topf = parseInt(document.getElementById('topf').value)
-    var SD = 15
+function arrayGetter(age_code) {
+    // this function returns an array of arrays
+    var mem_array = mem[age_code];
+    var imm_array = immediate[age_code];
+    var visuo_array = visuo[age_code];
+    var language_array = languageArray[age_code];
+    var att_array = attArray[age_code];
+    return {mem_array, imm_array, visuo_array, language_array, att_array}
+}
+
+function valueGetter(document){
+    var document_values = {}; // make an empty array
+    var document_values.sex = document.querySelector('input[name="assigned_gender_at_birth"]:checked').value;
+    var document_values.ethnicity = document.querySelector('input[name="ethnicity"]:checked').value;
+    var document_values.years_of_education = parseInt(document.getElementById('years_of_education').value);
+    var document_values.list_recall = parseInt(document.getElementById('listrecall').value);
+    var document_values.list_recog = parseInt(document.getElementById('listrecog').value);
+    var document_values.story_recall = parseInt(document.getElementById('storyrecall').value);
+    var document_values.figure_recall = parseInt(document.getElementById('figurerecall').value);
+    // Simply calculate subscale score for delayed memory which is a composite (Randolph)
+    var document_values.delayed_memory = list_recall + story_recall + figure_recall;
+    var document_values.storylearning = parseInt(document.getElementById('storylearning').value);
+    var document_values.listlearning = parseInt(document.getElementById('listlearning').value);
+    var document_values.naming = parseInt(document.getElementById('naming').value);
+    var document_values.semanticfluency = parseInt(document.getElementById('semanticfluency').value);
+    var document_values.coding = parseInt(document.getElementById('coding').value);
+    var document_values.digit_span = parseInt(document.getElementById('digitspan').value);
+    var document_values.figure_copy = parseInt(document.getElementById('figurecopy').value);
+    var document_values.line_orientation = parseInt(document.getElementById('lineorientation').value);
+    var document_values.age = parseInt(document.getElementById('age').value);
+    var document_values.topf = parseInt(document.getElementById('topf').value);
+    return document_values;
+}
+
+function valueGetter2(document, parsedInts = {
+    "years_of_education",
+    "listrecall",
+    "listrecog",
+    "storyrecall",
+    "figurerecall",
+    "storylearning",
+    "naming",
+    "semanticfluency",
+    "coding",
+    "digitspan",
+    "figurecopy",
+    "lineorientation",
+    "age",
+    "topf"},
+    textValues = {'assigned_gender_at_birth', 'ethnicity'}){
+    var document_values = {}; // make an empty array
+    for (let i = 0; i < textValues.length; i++){
+        var document_values[textValues[i]] = document.querySelector('input[name=textValues[i]]:checked').value;
+    }
+    for (let i = 0; i < parsedInts.length; i++){
+        var document_values[parsedInts[i]] = parseInt(document.querySelector('input[name=parsedInts[i]]:checked').value);
+    }
+    return document_values;
+}
+
+function getIndexScore(index_name, age_code, vertical_scale, horizontal_scale){
+    // Return an index score from two scale scores
+    var index = index_name[age_code][vertical_scale][horizontal_scale]
+    return index;
+}
+
+function getAllIndexScores(index_names, age_code, vertical_scales, horizontal_scales){
+    // Return an array of (integer) index scores
+    index_scores = {};
+    for(let i  =  0; i < index_names.length; i++){
+        index_scores[i] = getIndexScore(index_names[i], age_code, vertical_scale, horizontal_scale);
+    }
+    return index_scores;
+}
+
+var index_names = {"immediate_memory", "delayed_memory", "visuospatial",
+                    "language", "attention"}
+
+
+function calculate(document) {
+    document_values = valueGetter(document);
+    age_code = ageCode(document_values.age);
+    randolph_array = arrayGetter(age_code);
+
+    indices = getAllIndexScores(index_names, age_code, vertical_scale, horizontal_scale)
 
     list_recall_text = "You scored " + list_recall + "/10 on the free recall of ten words, a sensitive indicator of verbal learning and recall. "
     list_recog_text = "You scored " + list_recog + "/20 on the cued recall task which taxes delayed memory. "
@@ -26,35 +148,8 @@ function calculate() {
     story_text = "You scored " + storylearning + "/24 on the short story learning task which is similar."
 
 
-    // for memory
-    if (age > 79) {
-        var mem_array = mem[3];
-        var imm_array = immediate[3];
-        var visuo_array = visuo[3];
-        var language_array = languageArray[3];
-        var att_array = attArray[3];
-    } else if (age < 79  && age >= 70) {
-        var mem_array = mem[2];
-        var imm_array = immediate[2];
-        var visuo_array = visuo[2];
-        var language_array = languageArray[2];
-        var att_array = attArray[2];
-    } else if (69 >= age && age >= 60) {
-        var mem_array = mem[1];
-        var imm_array = immediate[1];
-        var visuo_array = visuo[1];
-        var language_array = languageArray[1];
-        var att_array = attArray[1];
-    } else if (59 >= age && age >= 50) {
-        var mem_array = mem[0];
-        var imm_array = immediate[0];
-        var visuo_array = visuo[0];
-        var language_array = languageArray[0];
-        var att_array = attArray[0];
-    }
     //DELAYED MEMORY
-    var delayed_memory_index = mem_array[delayed_memory][list_recog];
-
+    var delayed_memory_index = randolph_array.mem_array[delayed_memory][list_recog];
     var delayed_memory_text = "This gives a Delayed Memory Index Score of " + delayed_memory_index + ".";
     var delayed_memory_DIFF = delayed_memory_index - 100
     var delayed_memory_z = delayed_memory_DIFF / SD
@@ -115,27 +210,6 @@ function calculate() {
     document.getElementById('overall_rbans_letter').innerHTML = "<h2>Overall scores</h2>" + overall_centile_text
 
 
-    var years_of_education = parseInt(document.getElementById('years_of_education').value);
-    var sex = document.querySelector('input[name="assigned_gender_at_birth"]:checked').value;
-    var ethnicity = document.querySelector('input[name="ethnicity"]:checked').value;
-
-    if (years_of_education < 12) {
-        var yoebeta = 1;
-    } else if (years_of_education == 12) {
-        var yoebeta = 2;
-    } else if (years_of_education > 12 && years_of_education < 16) {
-        var yoebeta = 3;
-    } else if (years_of_education > 15) {
-        var yoebeta = 4;
-    }
-    var sexbeta = 1;
-    if (sex == "Female") {
-        var sexbeta = 0;
-    }
-    var ethnicbeta = 1;
-    if (ethnicity == "White") {
-        var ethnicbeta = 0;
-    }
     // Duff_immediate_memory
     var Immediate_Memory_Duff_SD = 17.24
     var Immediate_Memory_Duff_Pred = 95.54 - (age * 0.13) - (sexbeta * 4.36) + (yoebeta * 2.93) - (ethnicbeta * 6.65)

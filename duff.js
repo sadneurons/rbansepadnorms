@@ -1,3 +1,4 @@
+
 years_of_education = this.getField('Years_Of_Education').value
 sex = this.getField('Sex').value
 ethnicity = this.getField('Ethnicity').value
@@ -34,8 +35,10 @@ else {
 }
 
 // from Kevin Duff, Amir Ramezani,
-// Regression-Based Normative Formulae for the Repeatable Battery for the Assessment of Neuropsychological Status for Older Adults,
-// Archives of Clinical Neuropsychology, Volume 30, Issue 7, November 2015, Pages 600–604, https://doi.org/10.1093/arclin/acv052
+// Regression-Based Normative Formulae for the Repeatable Battery
+// for the Assessment of Neuropsychological Status for Older Adults,
+// Archives of Clinical Neuropsychology, Volume 30, Issue 7, November 2015,
+// Pages 600–604, https://doi.org/10.1093/arclin/acv052
 
 var List_Learning_Duff_SD = 5.56
 var List_Learning_Duff_Pred = 40.84 - (age * 0.25) - (sexbeta * 1.70) + (yoebeta * 0.76) - (ethnicbeta * 1.44)
@@ -68,6 +71,8 @@ var Story_Recall_Duff_Pred = 16.62 - (age * 0.14) - (sexbeta * 0.68) + (yoebeta 
 var Figure_Recall_Duff_SD = 4.07
 var Figure_Recall_Duff_Pred = 23.98 - (age * 0.17) + (sexbeta * 0.47) + (yoebeta * 0.29) - (ethnicbeta * 2.30)
 
+
+// Calculate the indices
 var Immediate_Memory_Duff_SD =  17.24
 var Immediate_Memory_Duff_Pred = 95.54 - (age * 0.13) - (sexbeta * 4.36) + (yoebeta * 2.93) - (ethnicbeta * 6.65)
 var Immediate_Memory_Duff_Z = (immediate_memory - Immediate_Memory_Duff_Pred)/Immediate_Memory_Duff_SD
